@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – ChatAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, #f64f59 100%);
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      top: -150px; left: -150px;
+      animation: float 8s ease-in-out infinite;
+    }
+    body::after {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      bottom: -100px; right: -100px;
+      animation: float 6s ease-in-out infinite reverse;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      padding: 44px 40px;
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      z-index: 1;
+      animation: slideUp 0.5s ease;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .logo-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 20px rgba(102,126,234,0.4);
+    }
+    .logo h1 { font-size: 22px; font-weight: 700; color: #1a1a2e; }
+    .logo p  { font-size: 13px; color: #888; margin-top: 2px; }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 6px;
+    }
+    .input-wrap {
+      position: relative;
+      margin-bottom: 18px;
+    }
+    .input-wrap .icon {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #aaa;
+      pointer-events: none;
+    }
+    input {
+      width: 100%;
+      padding: 12px 14px 12px 42px;
+      border: 2px solid #e8e8e8;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #333;
+      background: #fafafa;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(102,126,234,0.12);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+    }
+    .btn:hover  { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(102,126,234,0.5); }
+    .btn:active { transform: translateY(0); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .msg { font-size: 13px; margin-top: 14px; text-align: center; }
+    .error { color: #e74c3c; font-weight: 500; }
+    .footer-link { color: #666; margin-top: 20px; }
+    .footer-link a {
+      color: #667eea;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .footer-link a:hover { text-decoration: underline; }
+
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 20px 0;
+      color: #ccc; font-size: 12px;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: #eee;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <div class="logo-icon">💬</div>
+      <h1>Welcome back</h1>
+      <p>Sign in to continue to ChatAI</p>
+    </div>
+
+    <label for="email">Email address</label>
+    <div class="input-wrap">
+      <span class="icon">✉️</span>
+      <input type="email" id="email" placeholder="you@example.com" autocomplete="email" />
+    </div>
+
+    <label for="password">Password</label>
+    <div class="input-wrap">
+      <span class="icon">🔒</span>
+      <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" />
+    </div>
+
+    <button class="btn" id="login-btn" onclick="login()">Sign In</button>
+    <p class="msg error" id="error-msg"></p>
+
+    <div class="divider">or</div>
+    <p class="msg footer-link">Don't have an account? <a href="/register">Create one</a></p>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
